@@ -1,14 +1,15 @@
-#! /bin/bash
+#!/bin/bash
 # Decred Testnet Suite
 #
 # @license LGPL
 # @author Walker de Alencar <@walkeralencar>
-# @author contributors <@contributos>
-DCR_VERSION="0.0.7"
+# @author contributors <@marioaugustorama>
+DCR_VERSION="v0.0.7"
 DCR_FILE="linux-amd64-20160309-01.tar.gz"
-DCR_URL="https://github.com/decred/decred-release/releases/download/v0.0.7/linux-amd64-20160309-01.tar.gz"
-VERSION="0.2"
-TITLE="DCRTS v$VERSION by Walker de Alencar - DCR Wallet: v$DCR_VERSION"
+
+DCR_URL="https://github.com/decred/decred-release/releases/download/"${DCR_VERSION}"/"${DCR_FILE}
+VERSION="v0.2"
+TITLE="DCRTS ${VERSION} by Walker de Alencar - DCR Wallet: ${DCR_VERSION}"
 
 PWS=
 
@@ -35,9 +36,9 @@ commands (){
 
 header(){
   clear
-  echo "Decred Testnet Suite v$VERSION"
+  echo "Decred Testnet Suite $VERSION"
   echo "Author: Walker de Alencar"
-  echo "Wallet: v$DCR_VERSION"
+  echo "Wallet: $DCR_VERSION"
   echo ""
 }
 
@@ -47,6 +48,15 @@ howto(){
   echo "  cleanup  remove all files from testnet"
   echo "  install  creates symlinks on /usr/local/bin to use commands anywhere"
   echo ""
+}
+
+checkdialog(){
+if [ $(dpkg-query -W -f='${Status}' dialog 2>/dev/null | grep -c "ok installed") -eq 0 ];
+then
+	echo "Dialog not found!"
+	echo "Installing ..."
+	sudo apt-get install dialog > /dev/null 2>&1
+fi
 }
 
 rootpass(){
@@ -71,7 +81,7 @@ fixtty(){
 }
 
 download(){
-  wget -c "https://github.com/decred/decred-release/releases/download/v0.0.7/linux-amd64-20160309-01.tar.gz" 2>&1 | \
+  wget -c ${DCR_URL} 2>&1 | \
     stdbuf -o0 awk '/[.] +[0-9][0-9]?[0-9]?%/ { print substr($0,63,3) }' | \
     dialog --clear --backtitle "$TITLE" --title "Installation [1/4]" \
             --gauge "\n  Downloading file [$DCR_FILE] ..." 8 80
@@ -105,6 +115,7 @@ autoremove(){
 }
 
 installer(){
+  checkdialog
   rootpass
   download
   unpacking
