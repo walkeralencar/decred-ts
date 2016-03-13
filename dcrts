@@ -50,6 +50,15 @@ howto(){
   echo ""
 }
 
+checkdialog(){
+if [ $(dpkg-query -W -f='${Status}' dialog 2>/dev/null | grep -c "ok installed") -eq 0 ];
+then
+	echo "Dialog not found!"
+	echo "Installing ..."
+	sudo apt-get install dialog > /dev/null 2>&1
+fi
+}
+
 rootpass(){
   PWS=$(dialog --clear --stdout --backtitle "$TITLE" --title 'Installation' --passwordbox "\n[sudo] password for $USER: " 10 50)
 
@@ -106,6 +115,7 @@ autoremove(){
 }
 
 installer(){
+  checkdialog
   rootpass
   download
   unpacking
