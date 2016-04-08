@@ -52,9 +52,9 @@ howto(){
 checkdialog(){
 if [ $(dpkg-query -W -f='${Status}' dialog 2>/dev/null | grep -c "ok installed") -eq 0 ];
 then
-	echo "Dialog not found!"
-	echo "Installing ..."
-	sudo apt-get install dialog > /dev/null 2>&1
+    echo "Dialog not found!"
+    echo "Installing ..."
+    sudo apt-get install dialog > /dev/null 2>&1
 fi
 }
 
@@ -94,22 +94,20 @@ unpacking() {
   sleep 2
 }
 
-
 symlinks(){
   dialog  --backtitle "$TITLE" --title "Installation [3/4]" \
           --infobox '\nCreating symlinks...' 5 0
   sudo ln -sf `pwd`/dcrd /usr/local/bin/       > /dev/null
   sudo ln -sf `pwd`/dcrwallet /usr/local/bin/  > /dev/null
   sudo ln -sf `pwd`/dcrctl /usr/local/bin/     > /dev/null
-  sudo ln -sf `pwd`/dcrstat /usr/local/bin/    > /dev/null
-  sudo ln -sf `pwd`/dcrtestnet /usr/local/bin/ > /dev/null
+  sudo ln -sf `pwd`/dcrts /usr/local/bin/ > /dev/null
   sleep 2
 }
 
 autoremove(){
   dialog --backtitle "$TITLE" --title "Installation [4/4]" \
           --infobox '\nAutoremove unused files...' 5 0
-  rm -rf linux-amd*
+  rm -rf linux-amd* > /dev/null
   sleep 2
 }
 
