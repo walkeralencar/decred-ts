@@ -4,10 +4,10 @@
 # @license LGPL
 # @author Walker de Alencar <@walkeralencar>
 # @author contributors <@marioaugustorama>
-DCR_VERSION="v0.0.9"
-DCR_FILE="linux-amd64-20160401-01.tar.gz"
+DCR_VERSION="v0.0.10"
+DCR_FILE="linux-amd64-20160406-01.tar.gz"
 DCR_URL="https://github.com/decred/decred-release/releases/download/"${DCR_VERSION}"/"${DCR_FILE}
-VERSION="v0.3"
+VERSION="v0.4"
 TITLE="DCRTS ${VERSION} by Walker de Alencar - DCR Wallet: ${DCR_VERSION}"
 
 PWS=
@@ -52,13 +52,14 @@ howto(){
 checkdialog(){
 if [ $(dpkg-query -W -f='${Status}' dialog 2>/dev/null | grep -c "ok installed") -eq 0 ];
 then
-	echo "Dialog not found!"
-	echo "Installing ..."
-	sudo apt-get install dialog > /dev/null 2>&1
+    echo "Dialog not found!"
+    echo "Installing ..."
+    sudo apt-get install dialog > /dev/null 2>&1
 fi
 }
 
 rootpass(){
+
   PWS=$(dialog --clear --stdout --backtitle "$TITLE" --title 'Installation' --passwordbox "\n[sudo] password for $USER: " 10 50)
 
   ret=$?
@@ -94,28 +95,28 @@ unpacking() {
   sleep 2
 }
 
-
-symlinks(){
+installing(){
   dialog  --backtitle "$TITLE" --title "Installation [3/4]" \
-          --infobox '\nCreating symlinks...' 5 0
-  sudo ln -sf `pwd`/dcrd /usr/local/bin/       > /dev/null
-  sudo ln -sf `pwd`/dcrwallet /usr/local/bin/  > /dev/null
-  sudo ln -sf `pwd`/dcrctl /usr/local/bin/     > /dev/null
-  sudo ln -sf `pwd`/dcrstat /usr/local/bin/    > /dev/null
-  sudo ln -sf `pwd`/dcrtestnet /usr/local/bin/ > /dev/null
+          --infobox '\nInstalling...' 5 0
+  sudo mv `pwd`/dcrd /usr/local/bin/       > /dev/null
+  sudo mv `pwd`/dcrwallet /usr/local/bin/  > /dev/null
+  sudo mv `pwd`/dcrctl /usr/local/bin/     > /dev/null
+  sudo ln -sf `pwd`/dcrts /usr/local/bin/ > /dev/null
   sleep 2
 }
 
 autoremove(){
   dialog --backtitle "$TITLE" --title "Installation [4/4]" \
           --infobox '\nAutoremove unused files...' 5 0
-  rm -rf linux-amd*
+  rm -rf linux-amd* > /dev/null
   sleep 2
 }
 
 installer(){
   checkdialog
-  rootpass
+  if [[ $EUID -ne 0 ]]; then
+    rootpass
+  fi  
   download
   unpacking
   symlinks
