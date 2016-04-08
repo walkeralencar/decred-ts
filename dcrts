@@ -119,7 +119,7 @@ installer(){
   fi  
   download
   unpacking
-  symlinks
+  installing
   autoremove
   dialog --clear --backtitle "$TITLE" --title "Installation" \
           --msgbox "\nInstallation complete!" 7 0
