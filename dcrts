@@ -4,10 +4,10 @@
 # @license LGPL
 # @author Walker de Alencar <@walkeralencar>
 # @author contributors <@marioaugustorama>
-DCR_VERSION="v0.1.1"
-DCR_FILE="linux-amd64-20160425-01.tar.gz"
+DCR_VERSION="v0.1.2"
+DCR_FILE="decred-v0.1.2-linux-amd64-20160503-01.tar.gz"
 DCR_URL="https://github.com/decred/decred-release/releases/download/"${DCR_VERSION}"/"${DCR_FILE}
-VERSION="v0.5.1"
+VERSION="v0.5.2"
 TITLE="DCRTS ${VERSION} by Walker de Alencar - DCR Wallet: ${DCR_VERSION}"
 
 PWS=
