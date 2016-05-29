@@ -4,10 +4,10 @@
 # @license LGPL
 # @author Walker de Alencar <@walkeralencar>
 # @author contributors <@marioaugustorama>
-DCR_VERSION="v0.1.3"
-DCR_FILE="decred-v0.1.3-linux-amd64-20160510-01.tar.gz"
+DCR_VERSION="v0.1.4"
+DCR_FILE="decred-v0.1.4-linux-amd64-20160526-01.tar.gz"
 DCR_URL="https://github.com/decred/decred-release/releases/download/"${DCR_VERSION}"/"${DCR_FILE}
-VERSION="v0.5.3"
+VERSION="v0.5.4"
 TITLE="DCRTS ${VERSION} by Walker de Alencar - DCR Wallet: ${DCR_VERSION}"
 
 PWS=
@@ -138,10 +138,6 @@ cleanup(){
   rm -rf ~/.dcrd/logs/testnet/ > /dev/null
   echo "OK"
 
-  echo -n "  Certs... "
-  rm -rf ~/.dcrd/rpc.* > /dev/null
-  echo "OK"
-
   echo "Wallet[drcwallet]:"
   echo -n "  Data... "
   rm -rf ~/.dcrwallet/testnet/ > /dev/null
@@ -151,9 +147,6 @@ cleanup(){
   rm -rf ~/.dcrwallet/logs/testnet > /dev/null
   echo "OK"
 
-  echo -n "  Certs... "
-  rm -rf ~/.dcrwallet/rpc.* > /dev/null
-  echo "OK"
   echo "Complete Clean"
   echo ""
 }
