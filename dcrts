@@ -4,10 +4,10 @@
 # @license LGPL
 # @author Walker de Alencar <@walkeralencar>
 # @author contributors <@marioaugustorama>
-DCR_VERSION="v0.1.4"
-DCR_FILE="decred-v0.1.4-linux-amd64-20160526-01.tar.gz"
+DCR_VERSION="v0.1.5"
+DCR_FILE="decred-v0.1.5-linux-amd64-20160607-01.tar.gz"
 DCR_URL="https://github.com/decred/decred-release/releases/download/"${DCR_VERSION}"/"${DCR_FILE}
-VERSION="v0.5.4"
+VERSION="v0.5.5"
 TITLE="DCRTS ${VERSION} by Walker de Alencar - DCR Wallet: ${DCR_VERSION}"
 
 PWS=
@@ -92,7 +92,7 @@ unpacking() {
           --infobox '\nUnpacking files...' 5 0
   tar -xvf "$DCR_FILE" > /dev/null
   mv decred-linux-amd64/* ./   > /dev/null
-  sleep 2
+  sleep 1
 }
 
 installing(){
@@ -101,8 +101,9 @@ installing(){
   sudo mv `pwd`/dcrd /usr/local/bin/       > /dev/null
   sudo mv `pwd`/dcrwallet /usr/local/bin/  > /dev/null
   sudo mv `pwd`/dcrctl /usr/local/bin/     > /dev/null
+  sudo mv `pwd`/dcrticketbuyer /usr/local/bin/     > /dev/null
   sudo ln -sf `pwd`/dcrts /usr/local/bin/ > /dev/null
-  sleep 2
+  sleep 1
 }
 
 autoremove(){
@@ -110,7 +111,7 @@ autoremove(){
           --infobox '\nAutoremove unused files...' 5 0
   rm -rf decred-linux-amd64 > /dev/null
   rm -rf $DCR_FILE > /dev/null
-  sleep 2
+  sleep 1
 }
 
 installer(){
