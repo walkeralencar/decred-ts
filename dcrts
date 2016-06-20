@@ -7,7 +7,7 @@
 DCR_VERSION="v0.1.5"
 DCR_FILE="decred-v0.1.5-linux-amd64-20160607-01.tar.gz"
 DCR_URL="https://github.com/decred/decred-release/releases/download/"${DCR_VERSION}"/"${DCR_FILE}
-VERSION="v0.5.5"
+VERSION="v0.2.8"
 TITLE="DCRTS ${VERSION} by Walker de Alencar - DCR Wallet: ${DCR_VERSION}"
 
 PWS=
